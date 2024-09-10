@@ -19,9 +19,7 @@ export function LoginForm() {
   const { login, loading } = useAuth();
 
   const handleLogin = async () => {
-    const response = await login(email, password);
-    console.log(response);
-    
+    await login(email, password);
     setEmail("");
     setPassword("");
   };

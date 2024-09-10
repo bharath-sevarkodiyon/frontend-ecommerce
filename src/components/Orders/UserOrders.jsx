@@ -21,7 +21,12 @@ const UserOrders = () => {
   // Fetch orders from API
   const fetchOrders = useCallback(async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/orders`);
+      const response = await axios.get(`http://localhost:5000/api/orders`, {
+        withCredentials: true,
+        headers: {
+          'Cookie': document.cookie
+        }
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching orders", error);
@@ -75,6 +80,9 @@ const UserOrders = () => {
                   </p>
                   <p className="text-gray-600 mb-2">
                     Order Status: {order.status}
+                  </p>
+                  <p className="text-gray-600 mb-4">
+                    Mode of Payment: {order.paymentMethod}
                   </p>
 
                   {/* Display ordered products */}

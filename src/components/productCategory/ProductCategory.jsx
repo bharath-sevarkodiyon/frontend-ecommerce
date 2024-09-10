@@ -1,38 +1,3 @@
-// import axios from 'axios'
-// import React, { useEffect, useState } from 'react'
-
-// const ProductCategory = () => {
-//   const [productCategories, setProductCategories] = useState([])
-
-//   useEffect(() => {
-//     axios.get("http://localhost:5000/api/productCategory/")
-//       .then((response) => {
-//         // console.log(response.data)
-//         setProductCategories(response.data)
-//       })
-//       .catch((error) => {
-//         console.log(error)
-//       })
-//   }, [])
-
-//   return (
-//     <div className="flex overflow-x-auto space-x-5 p-5 mt-5 bg-yellow-50 justify-center">
-//       {productCategories.map((category, index) => (
-//         <div key={index} className="flex-shrink-0 w-36 text-center">
-//           <img 
-//             src={category.image} 
-//             alt={category.categoryName} 
-//             className="w-full h-28 object-cover rounded-md cursor-pointer" 
-//           />
-//           <p className="mt-2 text-sm font-semibold">{category.categoryName}</p>
-//         </div>
-//       ))}
-//     </div>
-//   )
-// }
-
-// export default ProductCategory
-
 import React from 'react';
 import { useProducts } from '../Provider/ProductProvider'; // Assuming the context is in context/ProductContext
 import { useNavigate } from 'react-router-dom';
@@ -50,7 +15,7 @@ const ProductCategory = () => {
   };
 
   return (
-    <div className="p-5 mt-5 bg-yellow-50">
+    <div className="p-5 mt-16 bg-yellow-50">
       {loading ? (
         // Skeletons for loading state
         <div className="flex overflow-x-auto space-x-5 justify-center">

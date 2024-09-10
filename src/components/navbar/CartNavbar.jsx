@@ -13,7 +13,7 @@ const CartNavbar = () => {
     const fetchUserData = async () => {
       const userId = Cookies.get("user_id"); // Get user_id from cookie
       if (userId && !user) { // Ensure user data is fetched only if user is not already set
-        console.log(userId);
+        // console.log(userId);
         await fetchUserById(userId); // Fetch user data using fetchUserById
       }
     };

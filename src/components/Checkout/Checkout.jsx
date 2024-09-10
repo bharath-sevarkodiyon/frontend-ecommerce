@@ -104,7 +104,12 @@ const Checkout = () => {
     try {
       const response = await axios.patch(
         `http://localhost:5000/user/${user._id}`,
-        address
+        address, {
+          withCredentials: true,
+          headers: {
+            'Cookie': document.cookie
+          }
+        }
       );
       updateUser({ ...user, ...response.data });
       setShowAddressPopup(false);
@@ -131,6 +136,7 @@ const Checkout = () => {
         const orderData = {
           created_by: user._id,
           productDetails: cartItems,
+          paymentMethod
         };
         await createOrder(orderData);
         navigate(`/order?cartId=${cartId}`);

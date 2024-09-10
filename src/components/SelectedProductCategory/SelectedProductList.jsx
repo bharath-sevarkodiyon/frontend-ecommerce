@@ -12,7 +12,6 @@ const SelectedProductList = () => {
   const { categoryName } = useParams();
   const navigate = useNavigate()
 
-
   useEffect(() => {
     const filterProductsByCategory = () => {
       if (!products.length || !categories.length) {
@@ -29,11 +28,10 @@ const SelectedProductList = () => {
       }
 
       // Filter products based on the selected category ID
-      
       const filteredProductsByCategory = products.filter(
         (product) => product.product_category === selectedCategory._id
       );
-      
+
       setFilteredProducts(filteredProductsByCategory);
       setLoading(false);
     };
@@ -46,14 +44,16 @@ const SelectedProductList = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
+      {/* Ensuring min height of screen and flex column for layout */}
       <BackNavigation/>
       {/* Heading */}
       <h2 className="mt-4 text-2xl font-bold mb-2 text-center">{categoryName}</h2>
 
       {/* Loading */}
       {loading ? (
-        <div className="flex justify-center items-center space-x-4">
+        <div className="flex justify-center items-center space-x-4 flex-grow">
+          {/* Added flex-grow here to take up remaining space when loading */}
           <Skeleton className="h-12 w-12 rounded-full" />
           <div className="space-y-2">
             <Skeleton className="h-4 w-[250px]" />
@@ -62,10 +62,14 @@ const SelectedProductList = () => {
         </div>
       ) : (
         // Product Grid
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-5 p-5 rounded-lg">
+        <div className="flex-grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-5 p-5 rounded-lg">
+          {/* Added flex-grow here to take up remaining space when not loading */}
           {filteredProducts.map((product, index) => (
-            <div key={index} className="bg-white text-center shadow-md rounded-lg p-3"
-            onClick={() => handleProductClick(product.productName)}>
+            <div
+              key={index}
+              className="bg-white text-center shadow-md rounded-lg p-3"
+              onClick={() => handleProductClick(product.productName)}
+            >
               <img
                 src={product.mainImage}
                 alt={product.productName}

@@ -56,7 +56,7 @@ const Orders = () => {
     }
   }, [user, cartId, products]);
 
-  console.log(orderItems);
+  // console.log(orderItems);
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -82,19 +82,19 @@ const Orders = () => {
           <div>
             {/* Display Order ID once */}
             {
-              <div className="bg-white shadow-md p-6">
-                <h2 className="text-xl font-semibold mb-4 text-gray-700">
+              <div className="bg-white shadow-md p-5">
+                <h2 className="text-xl font-semibold text-gray-700">
                   Order ID: <span className="font-normal">{orders._id}</span>
                 </h2>
               </div>
             }
 
-            <div className="space-y-8">
+            <div>
               {/* Display ordered products */}
               {orderItems.map((item) => (
                 <div
                   key={item.product_id}
-                  className="bg-white shadow-md rounded-lg p-6"
+                  className="bg-white shadow-md p-5"
                 >
                   <div className="flex items-center">
                     <div className="w-20 h-20 flex-shrink-0">
@@ -123,7 +123,7 @@ const Orders = () => {
 
             {/* Display total amount for the order */}
             {orderItems.length > 1 && (
-              <div className="bg-white shadow-md p-6 mt-6">
+              <div className="bg-white shadow-md p-5">
                 <h2 className="text-xl font-bold text-gray-700">
                   Total Amount: <span className="font-medium">₹{totalAmount}</span>
                 </h2>

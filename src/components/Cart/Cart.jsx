@@ -35,6 +35,8 @@ const Cart = () => {
           orderedQuantity: 1,
           sellingPrice: product.sellingPrice.$numberDecimal,
         };
+        console.log("Cart pg");
+        
         addOrUpdateCartItem(user._id, productDetails);
         setCartInitialized(true);
       }
@@ -104,7 +106,7 @@ const Cart = () => {
   };
 
   return (
-    <div>
+    <div className="bg-purple-100 w-screen h-screen">
       <CartNavbar />
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">Your Cart</h1>

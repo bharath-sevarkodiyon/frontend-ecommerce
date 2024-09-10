@@ -49,9 +49,9 @@ const ProductList = ({ category }) => {
   };
 
   return (
-    <div className="p-5">
+    <div className="p-5 bg-purple-100">
       {/* Heading */}
-      <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 bg-gray-100 py-3 rounded-md">
+      <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 bg-violet-200 py-3 rounded-md">
         {category}
       </h2>
 

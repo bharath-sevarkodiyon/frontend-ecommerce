@@ -12,7 +12,7 @@ import Checkout from "./components/Checkout/Checkout";
 import Orders from "./components/Orders/Orders";
 import { OrderProvider } from "./components/Provider/OrderProvider";
 import UserOrders from "./components/Orders/UserOrders";
-import { Toaster, toast } from "sonner";
+import { Toaster } from "sonner";
 import AdminDashboard from "./components/Admin/Home/AdminDashboard";
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
                   <Route path="/checkout/:id" element={<Checkout />} />
                   <Route path="/order" element={<Orders />} />
                   <Route path="/userorders" element={<UserOrders />} />
-                  <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                  <Route path="/admin" element={<AdminDashboard />} />
                 </Routes>
               </OrderProvider>
             </CartProvider>
