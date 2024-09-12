@@ -105,7 +105,7 @@ const Checkout = () => {
   const handleAddressSubmit = async () => {
     try {
       const response = await axios.patch(
-        `http://localhost:5000/user/${user._id}`,
+        `https://ecommerce-backend-2wdw.onrender.com/user/${user._id}`,
         address,
         {
           withCredentials: true,

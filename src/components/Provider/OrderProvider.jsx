@@ -10,7 +10,7 @@ export const OrderProvider = ({ children }) => {
   // creating a order details (checkout)
   const createOrder = async (orderData) => {
     try {
-      const response = await axios.post(`http://localhost:5000/api/orders`, orderData, {
+      const response = await axios.post(`https://ecommerce-backend-2wdw.onrender.com/api/orders`, orderData, {
         withCredentials: true,
         headers: {
           'Cookie': document.cookie
@@ -31,7 +31,7 @@ export const OrderProvider = ({ children }) => {
   // to show all the order (viewOrder)
   const fetchOrders = useCallback(async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/orders`, {
+      const response = await axios.get(`https://ecommerce-backend-2wdw.onrender.com/api/orders`, {
         withCredentials: true,
         headers: {
           'Cookie': document.cookie
@@ -48,7 +48,7 @@ export const OrderProvider = ({ children }) => {
   // to update the status of the order (viewOrder)
   const updateOrderStatus = async (orderId, updatedStatus) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/orders/${orderId}`, {
+      const response = await axios.put(`https://ecommerce-backend-2wdw.onrender.com/api/orders/${orderId}`, {
         status: updatedStatus,
       }, {
         withCredentials: true,
@@ -65,7 +65,7 @@ export const OrderProvider = ({ children }) => {
 
   const fetchOrdersById = useCallback(async (orderId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/orders/${orderId}`, {
+      const response = await axios.get(`https://ecommerce-backend-2wdw.onrender.com/api/orders/${orderId}`, {
         withCredentials: true,
         headers: {
           'Cookie': document.cookie

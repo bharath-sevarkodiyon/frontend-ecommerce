@@ -1,21 +1,23 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 import axios from "axios";
+import Cookies from "js-cookie"; // Import js-cookie
+
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartDetails, setCartDetails] = useState(null);
   const [cartData, setCartData] = useState([]); // Store the product details in the cart
+  const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cartId, setCartId] = useState(null);
-  const [cartItems, setCartItems] = useState([]);
 
   // Helper function to fetch cart details for a specific user
   const getCart = useCallback(async (userId) => {
     try {
       setLoading(true); // Start loading when fetching cart
       // Fetch all cart details
-      const response = await axios.get("http://localhost:5000/api/viewcart", {
+      const response = await axios.get("https://ecommerce-backend-2wdw.onrender.com/api/viewcart", {
         withCredentials: true,
         headers: {
           'Cookie': document.cookie
@@ -42,7 +44,7 @@ export const CartProvider = ({ children }) => {
   // Function to create a new cart if it doesn't exist
   const createCart = useCallback(async (userId, productDetails) => {
     try {
-      await axios.post("http://localhost:5000/api/viewcart", {
+      await axios.post("https://ecommerce-backend-2wdw.onrender.com/api/viewcart", {
         created_by: userId,
         productDetails: [productDetails], // Add the first product
       }, {
@@ -62,7 +64,7 @@ export const CartProvider = ({ children }) => {
   const updateCartItem = useCallback(async (userId, productDetails) => {
     try {
       // Fetch all carts to find the user's cart
-      const response = await axios.get("http://localhost:5000/api/viewcart", {
+      const response = await axios.get("https://ecommerce-backend-2wdw.onrender.com/api/viewcart", {
         withCredentials: true,
         headers: {
           'Cookie': document.cookie
@@ -94,7 +96,7 @@ export const CartProvider = ({ children }) => {
           
         }
 
-        await axios.put(`http://localhost:5000/api/viewcart/${cartId}`, {
+        await axios.put(`https://ecommerce-backend-2wdw.onrender.com/api/viewcart/${cartId}`, {
           productDetails: updatedProductDetails,
         }, {
           withCredentials: true,
@@ -124,7 +126,7 @@ export const CartProvider = ({ children }) => {
   const removeCartItem = useCallback(async (userId, productId) => {
     try {
       // Fetch all carts to find the user's cart
-      const response = await axios.get("http://localhost:5000/api/viewcart", {
+      const response = await axios.get("https://ecommerce-backend-2wdw.onrender.com/api/viewcart", {
         withCredentials: true,
         headers: {
           'Cookie': document.cookie
@@ -139,7 +141,7 @@ export const CartProvider = ({ children }) => {
           (item) => item.product_id !== productId
         );
 
-        await axios.put(`http://localhost:5000/api/viewcart/${cartId}`, {
+        await axios.put(`https://ecommerce-backend-2wdw.onrender.com/api/viewcart/${cartId}`, {
           productDetails: updatedProductDetails,
         }, {
           withCredentials: true,
@@ -161,7 +163,7 @@ export const CartProvider = ({ children }) => {
   const clearCart = async (cartId) => {
     try {
       // Clear the cart in the backend by cart ID
-      await axios.delete(`http://localhost:5000/api/viewcart/${cartId}`, {
+      await axios.delete(`https://ecommerce-backend-2wdw.onrender.com/api/viewcart/${cartId}`, {
         withCredentials: true,
         headers: {
           'Cookie': document.cookie
@@ -180,12 +182,25 @@ export const CartProvider = ({ children }) => {
   };
 
   // Load cart data on component mount
-  // useEffect(() => {
+  useEffect(() => {
   //   const userId = localStorage.getItem("userId"); // Assuming the user ID is stored in local storage
-  //   if (userId) {
-  //     getCart(userId); // Fetch cart details on mount
-  //   }
-  // }, [getCart]);
+    const userId = Cookies.get("user_id");
+    if (userId) {
+      getCart(userId); // Fetch cart details on mount
+    }
+  }, [getCart]);
+
+
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     const userId = Cookies.get("user_id"); // Get user_id from cookie
+  //     if (userId && !user) {
+  //       await fetchUserById(userId); // Fetch user data using fetchUserById
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, [fetchUserById, user]);
 
   const contextValue = {
     cartData,

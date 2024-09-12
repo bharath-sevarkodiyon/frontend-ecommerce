@@ -14,6 +14,7 @@ import { OrderProvider } from "./components/Provider/OrderProvider";
 import UserOrders from "./components/Orders/UserOrders";
 import { Toaster } from "sonner";
 import AdminDashboard from "./components/Admin/Home/AdminDashboard";
+import Navbar from "./components/navbar/Navbar";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <AuthProvider>
           <ProductProvider>
             <CartProvider>
+              <Navbar />
               <OrderProvider>
               <Toaster richColors/>
                 <Routes>
