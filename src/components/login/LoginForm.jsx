@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { useAuth } from "../Provider/AuthContext";
+import AuthenticateNavbar from "../navbar/AuthenticateNavbar";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -25,7 +26,8 @@ export function LoginForm() {
   };
 
   return (
-    <div className="grid place-items-center h-screen">
+    <div className="grid place-items-center h-screen bg-gray-100">
+      <AuthenticateNavbar/>
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl text-center">Login</CardTitle>

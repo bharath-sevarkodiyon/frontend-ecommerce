@@ -56,8 +56,8 @@ const UserOrders = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <CartNavbar />
-      <div className="container mx-auto p-4 md:p-8">
-        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+      <div className="container mx-auto p-4 md:p-8 mt-16">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold mb-6 text-center text-gray-800">
           Your Orders
         </h1>
 
@@ -71,7 +71,7 @@ const UserOrders = () => {
 
               return (
                 <div key={order._id} className="bg-white shadow-md rounded-lg p-6">
-                  <h2 className="text-xl font-semibold mb-4 text-gray-700">
+                  <h2 className="text-lg lg:text-xl font-semibold mb-4 text-gray-700">
                     Order ID: <span className="font-normal">{order._id}</span>
                   </h2>
                   {/* Display Order Created Date */}
@@ -100,7 +100,7 @@ const UserOrders = () => {
                           />
                         </div>
                         <div className="ml-4 flex-grow">
-                          <h3 className="text-lg font-semibold text-gray-800">
+                          <h3 className="md:text-lg font-semibold text-gray-800">
                             {product ? product.productName : "Unknown Product"}
                           </h3>
                           <p className="text-gray-600">Quantity: {item.orderedQuantity}</p>

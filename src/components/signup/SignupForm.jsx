@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "../Provider/AuthContext";
+import AuthenticateNavbar from "../navbar/AuthenticateNavbar";
 
 export function SignupForm() {
   const [firstName, setFirstName] = useState("");
@@ -42,7 +43,8 @@ export function SignupForm() {
   };
 
   return (
-    <div className="grid place-items-center h-screen">
+    <div className="grid place-items-center h-screen bg-gray-100">
+      <AuthenticateNavbar/>
       <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle className="text-xl text-center">Sign Up</CardTitle>

@@ -5,6 +5,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../Provider/AuthContext";
 import CartNavbar from "../navbar/CartNavbar";
 import { toast } from "sonner";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Skeleton } from "../ui/skeleton";
+import Footer from "../Footer/Footer";
 
 const Cart = () => {
   const { addOrUpdateCartItem, cartData, removeCartItem, getCart, cartId, cartItems } = useCart();
@@ -21,7 +24,7 @@ const Cart = () => {
   useEffect(() => {
     if (user) {
       getCart(user._id)
-      .then(() => {setIsFetchingCart(false)})
+      .then(() => setIsFetchingCart(false));
     } 
   }, [user, getCart]);
   
@@ -106,14 +109,32 @@ const Cart = () => {
   };
 
   return (
-    <div className="bg-purple-100 w-screen h-screen">
+    <div className="bg-purple-100 w-screen min-h-screen flex flex-col">
       <CartNavbar />
-      <div className="container mx-auto p-4">
+      <div className="flex-grow mx-auto w-screen p-4 mt-[64px]">
         <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
         {isFetchingCart ? (
-          <p>Please Login to your account.</p>
+          !user ? (
+            <Alert>
+              <AlertTitle>Please Login to your account</AlertTitle>
+              <AlertDescription>
+                You need to be logged in to view and manage your cart.
+              </AlertDescription>
+            </Alert>
+          ) : (
+            <div className="flex justify-center items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full" />
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-[250px] md:w-[400px]" />
+                <Skeleton className="h-4 w-[180px] md:w-[300px]" />
+                <Skeleton className="h-4 w-[180px] md:w-[300px]" />
+              </div>
+            </div>
+          )
         ) : cartData.length === 0 ? (
-          <p>Your cart is empty.</p>
+            <Alert>
+              <AlertTitle>Your cart is empty.</AlertTitle>
+            </Alert>
         ) : (
           <div>
             {cartData.map((item) => {
@@ -176,6 +197,7 @@ const Cart = () => {
           </div>
         )}
       </div>
+      <Footer className="mt-auto"/>
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import { ImageCarousel } from '../carousel/ImageCarousel';
 import Navbar from '../navbar/Navbar';
-import { ProductProvider } from "../Provider/ProductProvider";
 import ProductCategory from '../productCategory/ProductCategory';
 import ProductList from '../products/ProductList';
 import Footer from '../Footer/Footer';

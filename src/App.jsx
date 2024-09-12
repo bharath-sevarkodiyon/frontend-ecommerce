@@ -40,7 +40,7 @@ function App() {
                   <Route path="/checkout/:id" element={<Checkout />} />
                   <Route path="/order" element={<Orders />} />
                   <Route path="/userorders" element={<UserOrders />} />
-                  <Route path="/admin" element={<AdminDashboard />} />
+                  {/* <Route path="/admin" element={<AdminDashboard />} /> */}
                 </Routes>
               </OrderProvider>
             </CartProvider>

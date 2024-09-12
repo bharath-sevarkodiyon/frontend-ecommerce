@@ -3,10 +3,10 @@ import { useAuth } from "../Provider/AuthContext";
 import { useOrders } from "../Provider/OrderProvider";
 import { useCart } from "../Provider/CartProvider"; // Import Cart Context
 import { useLocation, useNavigate } from "react-router-dom";
-import BackNavigation from "../BackNavigation/BackNavigation";
 import { BsCheckCircle } from "react-icons/bs"; // Import Green Tick Icon
 import { useProducts } from "../Provider/ProductProvider";
 import CartNavbar from "../navbar/CartNavbar";
+import { Alert, AlertTitle } from "@/components/ui/alert";
 
 const Orders = () => {
   const { user } = useAuth();
@@ -41,13 +41,18 @@ const Orders = () => {
             orderedQuantity: orderItem.orderedQuantity,
             sellingPrice: product ? orderItem.sellingPrice : "0.00",
             mainImage: product ? product.mainImage : "",
-            individualPrice: product ? (orderItem.sellingPrice / orderItem.orderedQuantity).toFixed(2) : "0.00", // Calculate individual product price
+            individualPrice: product
+              ? (orderItem.sellingPrice / orderItem.orderedQuantity).toFixed(2)
+              : "0.00", // Calculate individual product price
           };
         });
         setOrderItems(updatedOrder);
 
         // Calculate the total amount for the order
-        const total = updatedOrder.reduce((sum, item) => sum + item.sellingPrice, 0);
+        const total = updatedOrder.reduce(
+          (sum, item) => sum + item.sellingPrice,
+          0
+        );
         setTotalAmount(total.toFixed(2)); // Set the total amount with two decimal points
 
         // Clear the cart after displaying order items
@@ -61,29 +66,31 @@ const Orders = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <CartNavbar />
-      <div className="container mx-auto p-4 md:p-8">
-        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+      <div className="container mx-auto p-4 mt-16 md:p-8">
+        <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center text-gray-800">
           Your Orders
         </h1>
 
         {/* Show success message */}
         {cartId && (
           <div className="flex items-center mb-6 justify-center">
-            <BsCheckCircle className="text-green-500 text-3xl mr-2" />
-            <p className="text-green-700 text-lg font-semibold">
+            <BsCheckCircle className="text-green-500 text-lg md:text-3xl mr-2" />
+            <p className="text-green-700 text-lg md:text-lg font-semibold">
               Successfully placed the order!
             </p>
           </div>
         )}
 
         {orders.length === 0 ? (
-          <p className="text-center text-gray-600">No orders found.</p>
+          <Alert>
+            <AlertTitle>No orders found.</AlertTitle>
+          </Alert>
         ) : (
           <div>
             {/* Display Order ID once */}
             {
               <div className="bg-white shadow-md p-5">
-                <h2 className="text-xl font-semibold text-gray-700">
+                <h2 className="md:text-lg lg:text-xl font-semibold text-gray-700">
                   Order ID: <span className="font-normal">{orders._id}</span>
                 </h2>
               </div>
@@ -92,10 +99,7 @@ const Orders = () => {
             <div>
               {/* Display ordered products */}
               {orderItems.map((item) => (
-                <div
-                  key={item.product_id}
-                  className="bg-white shadow-md p-5"
-                >
+                <div key={item.product_id} className="bg-white shadow-md p-5">
                   <div className="flex items-center">
                     <div className="w-20 h-20 flex-shrink-0">
                       <img
@@ -105,7 +109,7 @@ const Orders = () => {
                       />
                     </div>
                     <div className="ml-4 flex-grow">
-                      <h3 className="text-lg font-semibold text-gray-800">
+                      <h3 className="md:text-lg font-semibold text-gray-800">
                         {item.productName}
                       </h3>
                       <p className="text-gray-600">
@@ -113,7 +117,9 @@ const Orders = () => {
                       </p>
                       <p className="text-gray-600">
                         Price:{" "}
-                        <span className="font-medium">₹{item.individualPrice}</span>
+                        <span className="font-medium">
+                          ₹{item.individualPrice}
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -124,8 +130,9 @@ const Orders = () => {
             {/* Display total amount for the order */}
             {orderItems.length > 1 && (
               <div className="bg-white shadow-md p-5">
-                <h2 className="text-xl font-bold text-gray-700">
-                  Total Amount: <span className="font-medium">₹{totalAmount}</span>
+                <h2 className="md:text-xl font-bold text-gray-700">
+                  Total Amount:{" "}
+                  <span className="font-medium">₹{totalAmount}</span>
                 </h2>
               </div>
             )}

@@ -16,6 +16,7 @@ const ProductList = ({ category }) => {
         setLoading(true);
         return;
       }
+
       // Map the product category id with the product category name
       const categoryMap = categories.reduce((map, cat) => {
         map[cat._id] = cat.categoryName;
@@ -33,7 +34,7 @@ const ProductList = ({ category }) => {
         (product) => product.product_category_name === category
       );
 
-      setFilteredProducts(filteredProductsByCategory.slice(0, 5)); // Display only the first 5 products
+      setFilteredProducts(filteredProductsByCategory); // Set all products initially
       setLoading(false);
     };
 
@@ -47,6 +48,11 @@ const ProductList = ({ category }) => {
   const handleViewMoreClick = () => {
     navigate(`/product/${category}`); // Navigating to the respective category page
   };
+
+  // Adjust the number of products displayed based on screen size
+  const displayedProductsSmall = filteredProducts.slice(0, 4); // Show 4 products on small screens
+  const displayedProductsMedium = filteredProducts.slice(0, 6); // Show 6 products on medium screens
+  const displayedProductsLarge = filteredProducts.slice(0, 5); // Show 5 products on large screens
 
   return (
     <div className="p-5 bg-purple-100">
@@ -67,8 +73,29 @@ const ProductList = ({ category }) => {
       ) : (
         // Product Image Grid
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-6">
-            {filteredProducts.map((product, index) => (
+          {/* Small screens: 2 products per row */}
+          <div className="grid grid-cols-2 gap-6 mb-6 sm:hidden">
+            {displayedProductsSmall.map((product, index) => (
+              <div
+                key={index}
+                className="bg-white text-center shadow-md rounded-lg p-4 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                onClick={() => handleProductClick(product.productName)}
+              >
+                <img
+                  src={product.mainImage}
+                  alt={product.productName}
+                  className="w-full h-40 object-cover rounded-lg mb-4"
+                />
+                <p className="text-sm font-medium text-gray-800 bg-gray-50 py-2 px-1 rounded-md">
+                  {product.productName}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Medium screens: 3 products per row */}
+          <div className="hidden md:grid grid-cols-3 gap-6 mb-6 sm:hidden lg:hidden">
+            {displayedProductsMedium.map((product, index) => (
               <div
                 key={index}
                 className="bg-white text-center shadow-md rounded-lg p-4 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer"
@@ -78,6 +105,26 @@ const ProductList = ({ category }) => {
                   src={product.mainImage}
                   alt={product.productName}
                   className="w-full h-48 object-cover rounded-lg mb-4"
+                />
+                <p className="text-md font-medium text-gray-800 bg-gray-50 py-2 px-1 rounded-md">
+                  {product.productName}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Large screens: 5 products in a single row */}
+          <div className="hidden lg:grid grid-cols-5 gap-6 mb-6 md:hidden">
+            {displayedProductsLarge.map((product, index) => (
+              <div
+                key={index}
+                className="bg-white text-center shadow-md rounded-lg p-4 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                onClick={() => handleProductClick(product.productName)}
+              >
+                <img
+                  src={product.mainImage}
+                  alt={product.productName}
+                  className="w-full h-56 object-cover rounded-lg mb-4"
                 />
                 <p className="text-md font-medium text-gray-800 bg-gray-50 py-2 px-1 rounded-md">
                   {product.productName}

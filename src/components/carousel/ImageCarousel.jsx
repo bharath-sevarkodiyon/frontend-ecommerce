@@ -11,28 +11,27 @@ import {
 
 export function ImageCarousel() {
   const images = [
-    "https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/44fe68e438b997c9.jpeg?q=20",
-    "https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/47cd01296171e65b.jpg?q=20",
-    "https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/20a160ef30776af8.jpeg?q=20",
-    "https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/61775218f4487fe8.jpg?q=20",
-    "https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/cc633426b89ad841.png?q=20",
+    "https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/7c6cf1a109b087d2.jpg?q=20",
+    "https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/5cd83a0e505d4445.jpg?q=20",
+    "https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/e7554fcdb3042316.jpg?q=20",
+    "https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/d9290fb51138d286.png?q=20",
+    "https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/b76bba648130afc4.jpeg?q=20",
   ];
 
   const plugin = React.useRef(Autoplay({ delay: 2000 }));
 
   return (
-    <div className="hidden md:flex justify-center items-center w-full mt-5 mb-5">
+    <div className="relative w-full">
       <Carousel
         plugins={[plugin.current]}
-        className="max-w-screen-lg w-full"
-        // onMouseEnter={plugin.current.stop}
+        className="w-full xl:overflow-hidden"
         onMouseLeave={plugin.current.reset}
       >
         <CarouselContent>
           {images.map((image, index) => (
             <CarouselItem key={index} className="flex justify-center">
-              <div className="w-full h-[166px]">
-                <Card className="w-full h-full">
+              <div className="w-full h-[166px] xl:h-60 xl:w-screen">
+                <Card className="w-full h-full p-0">
                   <CardContent className="w-full h-full p-0">
                     <img
                       src={image}
